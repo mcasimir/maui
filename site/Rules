@@ -36,6 +36,7 @@ compile '/sitemap/' do
   # don’t filter or layout
 end
 
+=begin
 compile '/docs/' do
   filter :relativize_paths, :type => :html
   filter :erb
@@ -43,6 +44,7 @@ compile '/docs/' do
   filter :colorize_syntax, :default_colorizer => :pygmentsrb
   layout 'docs'
 end
+=end
 
 compile '*' do
   if item.binary?

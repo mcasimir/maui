@@ -1328,9 +1328,16 @@ angular.module('mobile-angular-ui.fastclick', [])
 
 .run([
   '$window', '$document', function($window, $document) {
-    $window.addEventListener("load", (function() {
-       FastClick.attach($document[0].body);
-    }), false);
+    if ($window.addEventListener) {
+      $window.addEventListener("load", (function () {
+        FastClick.attach($document[0].body);
+      }), false);
+    }
+    else {
+      $window.attachEvent("load", (function () {
+        FastClick.attach($document[0].body);
+      }), false);
+    }
   }
 ])
 

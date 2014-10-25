@@ -1265,7 +1265,7 @@ angular.module('mobile-angular-ui.directives.carousel', [])
       var found = false;
 
       for (var _i = 0; _i < items.length; _i++) {
-        item = items[_i];
+        var item = items[_i];
         idx += 1;
         if (angular.element(item).hasClass('active')) {
           found = true;
@@ -1328,9 +1328,16 @@ angular.module('mobile-angular-ui.fastclick', [])
 
 .run([
   '$window', '$document', function($window, $document) {
-    $window.addEventListener("load", (function() {
-       FastClick.attach($document[0].body);
-    }), false);
+    if ($window.addEventListener) {
+      $window.addEventListener("load", (function () {
+        FastClick.attach($document[0].body);
+      }), false);
+    }
+    else {
+      $window.attachEvent("load", (function () {
+        FastClick.attach($document[0].body);
+      }), false);
+    }
   }
 ])
 

@@ -11,8 +11,8 @@ angular.module('mobile-angular-ui.directives.carousel', [])
     };
     
     var carouselItems = function(id) {
-      var elem = angular.element(document.getElementById(id));
-      var res = angular.element(elem.children()[0]).children();
+      var elem = angular.element(document.getElementById(id).getElementsByClassName('carousel-inner'));
+      var res = angular.element(elem.children());
       elem = null;
       return res;
     };

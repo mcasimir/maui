@@ -6,6 +6,9 @@ angular.module('mobile-angular-ui.directives.navbars', [])
     restrict: "C",
     link: function(scope, elem, attrs) {
       elem.parent().addClass('has-navbar-top');
+      elem.bind("$destroy", function() {
+            elem.parent().removeClass('has-navbar-top');
+        });
     }
   };
 })
@@ -16,6 +19,9 @@ angular.module('mobile-angular-ui.directives.navbars', [])
     restrict: "C",
     link: function(scope, elem, attrs) {
       elem.parent().addClass('has-navbar-bottom');
+      elem.bind("$destroy", function() {
+            elem.parent().removeClass('has-navbar-bottom');
+        });
     }
   };
 });

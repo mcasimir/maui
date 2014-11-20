@@ -38,8 +38,13 @@
   ],
   "devDependencies": {
     "font-awesome": "4",
-    "bootstrap": "3",
+    "bootstrap": "3.2",
     "fastclick": "1",
     "overthrow": "0.7"
-  }
+  },
+  "version": "1.1.0-beta.30",
+  "moduleType": [
+    "node"
+  ],
+  "private": true
 }

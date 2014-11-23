@@ -1,68 +1,86 @@
-angular.module('mobile-angular-ui.directives.sidebars', [])
+(function() {
+  'use strict';
 
-.directive('sidebar', ['$document', '$rootScope', function($document, $rootScope) {
-  return {
-    replace: false,
-    restrict: "C",
-    link: function(scope, elem, attrs) {
-      var shouldCloseOnOuterClicks = true;
-      
-      if( attrs.closeOnOuterClicks == 'false' || attrs.closeOnOuterClicks == '0') {
-        shouldCloseOnOuterClicks = false;
-      }
+  var module = angular.module(
+    'mobile-angular-ui.sidebars', [
+      'mobile-angular-ui.sharedState',
+      'mobile-angular-ui.outerClick'
+    ]
+  );
 
-      if (elem.hasClass('sidebar-left')) {
-        elem.parent().addClass('has-sidebar-left');
-      }
+  angular.forEach(['left', 'right'], function (side) {
+    var directiveName = 'sidebar' + side.charAt(0).toUpperCase() + side.slice(1);
+    module.directive(directiveName, [
+      '$rootElement',
+      'SharedState',
+      'bindOuterClick',
+      '$location',
+      function (
+        $rootElement,
+        SharedState,
+        bindOuterClick,
+        $location
+      ) {
+        
+        var outerClickCb = function (scope){
+          SharedState.turnOff(directiveName);
+        };
 
-      if (elem.hasClass('sidebar-right')) {
-        elem.parent().addClass('has-sidebar-right');
-      }
+        var outerClickIf = function() {
+          return SharedState.isActive(directiveName);
+        };
+        
+        return {
+          restrict: 'C',
+          link: function (scope, elem, attrs) {
+            var parentClass = 'has-sidebar-' + side;
+            var activeClass = 'sidebar-' + side + '-in';
 
-      var isAncestorOrSelf = function(element, target) {
-        var parent = element;
+            $rootElement.addClass(parentClass);
+            scope.$on('$destroy', function () {
+              $rootElement
+                .removeClass(parentClass);
+              $rootElement
+                .removeClass(activeClass);
+            });
 
-        while (parent.length > 0) {
-            if (parent[0] === target[0]) {
-                parent = null;     
-                return true;
-            }
-            parent = parent.parent();
-        }
+            var defaultActive = attrs.active !== undefined && attrs.active !== 'false';          
+            SharedState.initialize(scope, directiveName, defaultActive);
 
-        parent = null;
-        return false;
-      };
+            scope.$on('mobile-angular-ui.state.changed.' + directiveName, function (e, active) {
+              if (attrs.uiTrackAsSearchParam === '' || attrs.uiTrackAsSearchParam) {
+                $location.search(directiveName, active || null);
+              }
+              
+              if (active) {
+                $rootElement
+                  .addClass(activeClass);
+              } else {
+                $rootElement
+                  .removeClass(activeClass);
+              }
+            });
 
-      var closeOnOuterClicks = function(e) {
-        if(! isAncestorOrSelf(angular.element(e.target), elem)) {
-            $rootScope.toggle(attrs.id, 'off');
-            e.preventDefault()
-            return false;
-        }
-      }
-      
-      var clearCb1 = angular.noop();
-      
-      if (shouldCloseOnOuterClicks) {
-        clearCb1 = $rootScope.$on('mobile-angular-ui.toggle.toggled', function(e, id, active){
-          if(id == attrs.id) {
-            if(active) {
-              setTimeout(function(){
-                $document.on('click tap', closeOnOuterClicks);
-              }, 300);
-            } else {
-              $document.unbind('click tap', closeOnOuterClicks);
+            scope.$on('$routeChangeSuccess', function() {
+              SharedState.turnOff(directiveName);
+            });
+
+            scope.$on('$routeUpdate', function() {
+              if (attrs.uiTrackAsSearchParam) {
+                if (($location.search())[directiveName]) {
+                  SharedState.turnOn(directiveName);
+                } else {
+                  SharedState.turnOff(directiveName);
+                }                
+              }
+            });
+
+            if (attrs.closeOnOuterClicks !== 'false') {
+              bindOuterClick(scope, elem, outerClickCb, outerClickIf);
             }
           }
-        });
+        };
       }
-
-      scope.$on('$destroy', function(){
-        clearCb1();
-        $document.unbind('click tap', closeOnOuterClicks);
-      });
-
-    }
-  };
-}]);
+    ]);
+  });
+}());

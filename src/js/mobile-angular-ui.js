@@ -1,14 +1,19 @@
-angular.module("mobile-angular-ui", [
-  'mobile-angular-ui.pointer-events',
-  'mobile-angular-ui.active-links',
-  'mobile-angular-ui.fastclick',
-  'mobile-angular-ui.scrollable',
-  'mobile-angular-ui.directives.toggle',
-  'mobile-angular-ui.directives.overlay',
-  'mobile-angular-ui.directives.forms',
-  'mobile-angular-ui.directives.panels',
-  'mobile-angular-ui.directives.capture',
-  'mobile-angular-ui.directives.sidebars',
-  'mobile-angular-ui.directives.navbars',
-  'mobile-angular-ui.directives.carousel'
- ]);
+(function() {
+  'use strict';
+
+  angular.module('mobile-angular-ui', [
+    'mobile-angular-ui.pointerEvents',
+    'mobile-angular-ui.activeLinks',
+    'mobile-angular-ui.fastclick',
+    'mobile-angular-ui.sharedState',
+    'mobile-angular-ui.ui',
+    'mobile-angular-ui.outerClick',
+    'mobile-angular-ui.modals',
+    'mobile-angular-ui.switch',
+    'mobile-angular-ui.sidebars',
+    'mobile-angular-ui.scrollable',
+    'mobile-angular-ui.capture',
+    'mobile-angular-ui.navbars'
+  ]);
+
+}());

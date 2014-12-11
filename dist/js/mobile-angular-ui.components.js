@@ -591,6 +591,18 @@
               }
             });
 
+            scope.$on('$stateChangeSuccess', function() {
+              SharedState.turnOff(stateName);
+              if (attrs.uiTrackAsSearchParam) {
+                if (($location.search())[stateName]) {
+                  SharedState.turnOn(stateName);
+                } else {
+                  SharedState.turnOff(stateName);
+                }                
+              }
+            });
+
+
             if (attrs.closeOnOuterClicks !== 'false') {
               bindOuterClick(scope, elem, outerClickCb, outerClickIf);
             }
@@ -618,6 +630,7 @@
     };
   }]);
 }());
+
 (function() {
   'use strict';  
   angular.module('mobile-angular-ui.components.switch', [])

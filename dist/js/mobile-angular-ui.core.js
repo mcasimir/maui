@@ -883,7 +883,10 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
        $rootScope.$on('$routeChangeStart', function() {
          Capture.resetAll();
        });
-     }
+       $rootScope.$on('$stateChangeStart', function() {
+         Capture.resetAll();
+       });
+      }
    ])
 
    .factory('Capture', [
@@ -968,6 +971,7 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
    ]);
 
 }());
+
 (function () {
    'use strict';
    var module = angular.module('mobile-angular-ui.core.fastclick', []);

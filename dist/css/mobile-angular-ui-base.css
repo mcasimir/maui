@@ -7327,7 +7327,6 @@ a.list-group-item .icon.pull-right {
 }
 
 .navbar-app {
-  min-height: 50px;
   border-color: #cccccc;
   background: #f7f7f7;
   border-width: 1px;
@@ -7345,7 +7344,6 @@ a.list-group-item .icon.pull-right {
 .navbar-app .btn {
   background: none;
   border: none;
-  line-height: 50px;
   padding-top: 0;
   padding-bottom: 0;
   color: #007aff;
@@ -7374,16 +7372,22 @@ a.list-group-item .icon.pull-right {
 }
 
 .has-navbar-top .app-body {
-  padding-top: 51px;
+  padding-top: 50px;
 }
 
 .has-navbar-bottom .app-body {
-  padding-bottom: 51px;
+  padding-bottom: 50px;
 }
 
 .navbar-absolute-top {
   top: 0;
   border-bottom-width: 1px;
+  min-height: 50px;
+}
+
+.navbar-absolute-top .btn-navbar,
+.navbar-absolute-top .btn {
+  line-height: 50px;
 }
 
 .navbar-absolute-bottom {
@@ -7391,6 +7395,12 @@ a.list-group-item .icon.pull-right {
   bottom: 0;
   border-bottom: 0 none;
   border-top-width: 1px;
+  min-height: 50px;
+}
+
+.navbar-absolute-bottom .btn-navbar,
+.navbar-absolute-bottom .btn {
+  line-height: 50px;
 }
 
 .sidebar {

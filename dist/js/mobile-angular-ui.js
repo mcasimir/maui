@@ -883,7 +883,10 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
        $rootScope.$on('$routeChangeStart', function() {
          Capture.resetAll();
        });
-     }
+       $rootScope.$on('$stateChangeStart', function() {
+         Capture.resetAll();
+       });
+      }
    ])
 
    .factory('Capture', [
@@ -968,6 +971,7 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
    ]);
 
 }());
+
 (function () {
    'use strict';
    var module = angular.module('mobile-angular-ui.core.fastclick', []);
@@ -2052,6 +2056,18 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
               }
             });
 
+            scope.$on('$stateChangeSuccess', function() {
+              SharedState.turnOff(stateName);
+              if (attrs.uiTrackAsSearchParam) {
+                if (($location.search())[stateName]) {
+                  SharedState.turnOn(stateName);
+                } else {
+                  SharedState.turnOff(stateName);
+                }                
+              }
+            });
+
+
             if (attrs.closeOnOuterClicks !== 'false') {
               bindOuterClick(scope, elem, outerClickCb, outerClickIf);
             }
@@ -2079,6 +2095,7 @@ if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) 
     };
   }]);
 }());
+
 (function() {
   'use strict';  
   angular.module('mobile-angular-ui.components.switch', [])

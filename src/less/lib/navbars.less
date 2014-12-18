@@ -1,5 +1,4 @@
 .navbar-app {  
-  min-height: @navbar-app-height;
   border-color: @navbar-default-border;
   background: @navbar-default-bg;
   border-width: 1px;
@@ -14,7 +13,6 @@
  .btn-navbar, .btn {
     background: none;
     border: none;
-    line-height: @navbar-app-height;
     padding-top: 0;
     padding-bottom: 0;
     color: @navbar-default-link-color;
@@ -51,16 +49,21 @@
 }
 
 .has-navbar-top .app-body {
-  padding-top: @navbar-app-height + 1;
+  padding-top: @navbar-app-top-height;
 }
 
 .has-navbar-bottom .app-body {
-  padding-bottom: @navbar-app-height + 1;
+  padding-bottom: @navbar-app-bottom-height;
 }
 
 .navbar-absolute-top {
   top:0;
   border-bottom-width: 1px;
+  min-height: @navbar-app-top-height;
+
+  .btn-navbar, .btn {
+    line-height: @navbar-app-top-height;
+  }
 }
 
 .navbar-absolute-bottom {
@@ -68,4 +71,9 @@
   bottom: 0;
   border-bottom: 0 none;
   border-top-width: 1px;
+  min-height: @navbar-app-bottom-height;
+
+  .btn-navbar, .btn {
+    line-height: @navbar-app-bottom-height;
+  }
 }

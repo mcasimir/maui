@@ -273,6 +273,10 @@
             values[id] = value;
             if (prev !== value) {
               $rootScope.$broadcast('mobile-angular-ui.state.changed.' + id, value, prev);
+            } else {
+               if (prev && value && id.toUpperCase().indexOf('BAR')==-1) { 
+                  this.turnOff(id);
+               }
             }
             return value;
           } else {

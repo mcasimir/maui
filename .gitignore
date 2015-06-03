@@ -102,3 +102,6 @@ site/crash.log
 site/Gemfile.lock
 
 TODO.md
+
+# ignore dist
+dist/

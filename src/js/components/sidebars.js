@@ -8,10 +8,10 @@ Sidebars can be placed either in left side or right side adding respectively `.s
 ``` html
 <div class="sidebar sidebar-left">
   <div class="scrollable">
-    <h1 class="scrollable-header app-name">My App</h1>  
+    <h1 class="scrollable-header app-name">My App</h1>
     <div class="scrollable-content">
       <div class="list-group" ui-turn-off='uiSidebarLeft'>
-        <a class="list-group-item" href="#/link1">Link 1 
+        <a class="list-group-item" href="#/link1">Link 1
           <i class="fa fa-chevron-right pull-right"></i></a>
         <a class="list-group-item" href="#/link2">Link 2
           <i class="fa fa-chevron-right pull-right"></i></a>
@@ -64,7 +64,7 @@ By default sidebar are closed by clicking/tapping outside them.
         SharedState,
         bindOuterClick,
         $location
-      ) {  
+      ) {
         return {
           restrict: 'C',
           link: function (scope, elem, attrs) {
@@ -94,14 +94,11 @@ By default sidebar are closed by clicking/tapping outside them.
                 .removeClass(activeClass);
             });
 
-            var defaultActive = attrs.active !== undefined && attrs.active !== 'false';          
-            SharedState.initialize(scope, stateName, {defaultValue: defaultActive});
-
             scope.$on('mobile-angular-ui.state.changed.' + stateName, function (e, active) {
               if (attrs.uiTrackAsSearchParam === '' || attrs.uiTrackAsSearchParam) {
                 $location.search(stateName, active || null);
               }
-              
+
               if (active) {
                 $rootElement
                   .addClass(visibleClass);
@@ -124,19 +121,22 @@ By default sidebar are closed by clicking/tapping outside them.
                   SharedState.turnOn(stateName);
                 } else {
                   SharedState.turnOff(stateName);
-                }                
+                }
               }
             });
 
             scope.$on('mobile-angular-ui.app.transitionend', function() {
               if (!SharedState.isActive(stateName)) {
-                $rootElement.removeClass(visibleClass);  
+                $rootElement.removeClass(visibleClass);
               }
             });
 
             if (attrs.closeOnOuterClicks !== 'false') {
               bindOuterClick(scope, elem, outerClickCb, outerClickIf);
             }
+
+            var defaultActive = attrs.active !== undefined && attrs.active !== 'false';
+            SharedState.initialize(scope, stateName, {defaultValue: defaultActive});
           }
         };
       }
@@ -147,10 +147,10 @@ By default sidebar are closed by clicking/tapping outside them.
     return {
       restrict: 'C',
       link: function(scope, element) {
-        
+
         element.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend', function() {
           $rootScope.$broadcast('mobile-angular-ui.app.transitionend');
-        });          
+        });
 
       }
     };

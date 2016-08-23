@@ -166,7 +166,7 @@
            if (!b) {
              return;
            }
-           b.element.html(content);
+           b.element.html(b.element.html() + content);
            $compile(b.element.contents())(scope);
          }
 

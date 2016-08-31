@@ -57,7 +57,9 @@ describe('components', function() {
 
     describe('hideTopNav', function() {
       it('hides the navbarAbsoluteTop when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-top" nav-controller /><ng-view><div class="hide-top-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-top" nav-controller />';
+        value += '<ng-view><div class="hide-top-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 
@@ -68,7 +70,9 @@ describe('components', function() {
 
     describe('hideBottomNav', function() {
       it('hides the navbarAbsoluteBottom when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><ng-view><div class="hide-bottom-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-bottom" nav-controller />';
+        value += '<ng-view><div class="hide-bottom-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 
@@ -79,7 +83,9 @@ describe('components', function() {
 
     describe('slideoutBottomNav', function() {
       it('hides the navbarAbsoluteBottom when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><ng-view><div class="slideout-bottom-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-bottom" nav-controller />';
+        value += '<ng-view><div class="slideout-bottom-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 
@@ -90,7 +96,9 @@ describe('components', function() {
 
     describe('slideoutTopNav', function() {
       it('hides the navbarAbsoluteTop when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-top" nav-controller /><ng-view><div class="slideout-top-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-top" nav-controller />';
+        value += '<ng-view><div class="slideout-top-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 
@@ -101,7 +109,10 @@ describe('components', function() {
 
     describe('hideBothNav', function() {
       it('hides both navbarAbsoluteTop && navbarAbsoluteBottom when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><div class="navbar-absolute-top" nav-controller /><ng-view><div class="hide-both-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-bottom" nav-controller />';
+        value += '<div class="navbar-absolute-top" nav-controller /><ng-view>';
+        value += '<div class="hide-both-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 
@@ -114,7 +125,10 @@ describe('components', function() {
 
     describe('slideoutBothNav', function() {
       it('hides both navbarAbsoluteTop && navbarAbsoluteBottom when present within the nested view', function() {
-        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><div class="navbar-absolute-top" nav-controller /><ng-view><div class="slideout-both-nav"></div></ng-view></div>');
+        let value = '<div><div class="navbar-absolute-bottom" nav-controller />';
+        value += '<div class="navbar-absolute-top" nav-controller /><ng-view>';
+        value += '<div class="slideout-both-nav"></div></ng-view></div>';
+        let elem = angular.element(value);
         compile(elem)(scope);
         scope.$digest();
 

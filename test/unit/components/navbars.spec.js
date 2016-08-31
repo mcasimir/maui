@@ -54,5 +54,76 @@ describe('components', function() {
         expect($rootElement.attr('class')).not.toContain('has-navbar-bottom');
       });
     });
+
+    describe('hideTopNav', function() {
+      it('hides the navbarAbsoluteTop when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-top" nav-controller /><ng-view><div class="hide-top-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-top');
+        expect(elem.find('.navbar-absolute-top').attr('class')).toContain('ng-hide');
+      });
+    });
+
+    describe('hideBottomNav', function() {
+      it('hides the navbarAbsoluteBottom when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><ng-view><div class="hide-bottom-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-bottom');
+        expect(elem.find('.navbar-absolute-bottom').attr('class')).toContain('ng-hide');
+      });
+    });
+
+    describe('slideoutBottomNav', function() {
+      it('hides the navbarAbsoluteBottom when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><ng-view><div class="slideout-bottom-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-bottom');
+        expect(elem.find('.navbar-absolute-bottom').attr('class')).toContain('ng-hide');
+      });
+    });
+
+    describe('slideoutTopNav', function() {
+      it('hides the navbarAbsoluteTop when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-top" nav-controller /><ng-view><div class="slideout-top-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-top');
+        expect(elem.find('.navbar-absolute-top').attr('class')).toContain('ng-hide');
+      });
+    });
+
+    describe('hideBothNav', function() {
+      it('hides both navbarAbsoluteTop && navbarAbsoluteBottom when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><div class="navbar-absolute-top" nav-controller /><ng-view><div class="hide-both-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-bottom');
+        expect($rootElement.attr('class')).not.toContain('has-navbar-top');
+        expect(elem.find('.navbar-absolute-bottom').attr('class')).toContain('ng-hide');
+        expect(elem.find('.navbar-absolute-top').attr('class')).toContain('ng-hide');
+      });
+    });
+
+    describe('slideoutBothNav', function() {
+      it('hides both navbarAbsoluteTop && navbarAbsoluteBottom when present within the nested view', function() {
+        let elem = angular.element('<div><div class="navbar-absolute-bottom" nav-controller /><div class="navbar-absolute-top" nav-controller /><ng-view><div class="slideout-both-nav"></div></ng-view></div>');
+        compile(elem)(scope);
+        scope.$digest();
+
+        expect($rootElement.attr('class')).not.toContain('has-navbar-bottom');
+        expect($rootElement.attr('class')).not.toContain('has-navbar-top');
+        expect(elem.find('.navbar-absolute-bottom').attr('class')).toContain('ng-hide');
+        expect(elem.find('.navbar-absolute-top').attr('class')).toContain('ng-hide');
+      });
+    });
+
   });
 });

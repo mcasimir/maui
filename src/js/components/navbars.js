@@ -88,31 +88,6 @@
 
   var global;
 
-  /**
-  * @directive navController
-  * @restrict C
-  * @description
-  *
-  * Directive to bind controller to navbar
-  *
-  * ``` html
-  *  <div class='navbar navbar-app navbar-absolute-top' nav-controller>
-  *    <!-- ... -->
-  *  </div>
-  * ```
-  */
-  module.directive('navController', function() {
-    return {
-      restrict: 'A',
-      controller: function() {
-        this.registerController = function(name, ctrl) {
-          this[name] = ctrl;
-        };
-      },
-      link: function(scope) {}
-    };
-  });
-
  /**
   * @directive navbarAbsoluteTop
   * @restrict C
@@ -147,7 +122,11 @@
       function($rootElement) {
         return {
           restrict: 'C',
-          require: 'navController',
+          controller: function() {
+            this.registerController = function(name, ctrl) {
+              this[name] = ctrl;
+            };
+          },
           link: function(scope, elem, attr, ctrl) {
             $rootElement.addClass('has-navbar-' + side);
             scope.$on('$destroy', function() {

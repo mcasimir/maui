@@ -45,7 +45,8 @@
               var href = link.attr('href');
 
               if (!href) {
-                return link.removeClass('active');
+                link.removeClass('active');
+                continue;
               }
 
               var html5Mode = $locationProvider.html5Mode().enabled;
@@ -54,12 +55,13 @@
                 if (href.slice(0, linkPrefix.length) === linkPrefix) {
                   href = href.slice(linkPrefix.length);
                 } else {
-                  return link.removeClass('active');
+                  link.removeClass('active');
+                  continue;
                 }
               }
 
               if (href.charAt(0) !== '/') {
-                return link.removeClass('active');
+                link.removeClass('active');
               }
 
               href = href.split('#')[0].split('?')[0];

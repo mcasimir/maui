@@ -130,6 +130,11 @@
         return {
           link: function(scope, elem, attrs) {
             var onSwipe = $parse(attrs[directiveName]);
+            var options;
+            if(attrs["uiMobileOptions"]) {
+                var parseFn = $parse(attrs["uiMobileOptions"]);
+                options = parseFn(scope);
+            }
             $swipe.bind(elem, {
               end: function(swipe, event) {
                 if (swipe.direction === direction.toUpperCase()) {
@@ -141,7 +146,7 @@
                   }
                 }
               }
-            });
+            }, options);
           }
         };
       }]);

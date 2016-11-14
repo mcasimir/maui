@@ -461,7 +461,7 @@
           var moveEventHandler = eventHandlers.move;
           var cancelEventHandler = eventHandlers.cancel;
 
-          var $movementTarget = angular.element($element[0].ownerDocument);
+          var $movementTarget = typeof options.movementTarget === 'function' ? options.movementTarget($element) : angular.element($element[0].ownerDocument);
           var onTouchMove;
           var onTouchEnd;
           var onTouchCancel;

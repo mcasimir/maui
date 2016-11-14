@@ -132,8 +132,8 @@
             var onSwipe = $parse(attrs[directiveName]);
             var options;
             if (attrs.uiMobileOptions) {
-                var parseFn = $parse(attrs.uiMobileOptions);
-                options = parseFn(scope);
+              var parseFn = $parse(attrs.uiMobileOptions);
+              options = parseFn(scope);
             }
             $swipe.bind(elem, {
               end: function(swipe, event) {

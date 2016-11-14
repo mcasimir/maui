@@ -97,8 +97,8 @@
     };
 
     var MOVEMENT_TARGET = function($element) {
-        return $element[0].ownerDocument;
-    }
+      return $element[0].ownerDocument;
+    };
 
     /**
      * Set default pointer events option.
@@ -240,7 +240,7 @@
      * @memberOf mobile-angular-ui.gestures.touch~$touch.$touchProvider
      */
     this.setMovementTarget = function(fn) {
-        MOVEMENT_TARGET = fn;
+      MOVEMENT_TARGET = fn;
     };
 
     //

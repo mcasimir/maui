@@ -96,6 +96,10 @@
       return $element[0].ownerDocument.documentElement.getBoundingClientRect();
     };
 
+    var MOVEMENT_TARGET = function($element) {
+        return $element[0].ownerDocument;
+    }
+
     /**
      * Set default pointer events option.
      * Pointer Events option specifies a device-by-device map between device specific events and
@@ -179,6 +183,7 @@
     this.setMovementThreshold = function(v) {
       MOVEMENT_THRESHOLD = v;
     };
+
     /**
      * Set default sensitive area.
      *
@@ -210,6 +215,32 @@
      */
     this.setSensitiveArea = function(fnOrElementOrRect) {
       SENSITIVE_AREA = fnOrElementOrRect;
+    };
+
+    /**
+     * Set default movement target.
+     *
+     * The movement target is the element on wich we register mouse move / end / cancel after first touch.
+     *
+     * By default movement target is defined as `ownerDocument`
+     *
+     * ie.
+     *
+     * ``` js
+     * $setMovementTarget(function($element) {
+     *   return $element;
+     * });
+     * ```
+     *
+     * @param {function} movementTarget The new default movement target,
+     *                                  taking an element and returning another
+     *                                  element
+     *
+     * @method  setMovementTarget
+     * @memberOf mobile-angular-ui.gestures.touch~$touch.$touchProvider
+     */
+    this.setMovementTarget = function(fn) {
+        MOVEMENT_TARGET = fn;
     };
 
     //
@@ -445,6 +476,7 @@
           var isValid = options.valid === undefined ? VALID : options.valid;
           var movementThreshold = options.movementThreshold === undefined ? MOVEMENT_THRESHOLD : options.movementThreshold;
           var sensitiveArea = options.sensitiveArea === undefined ? SENSITIVE_AREA : options.sensitiveArea;
+          var movementTarget = options.movementTarget === undefined ? MOVEMENT_TARGET : options.movementTarget;
 
           // first and last touch
           var t0;
@@ -461,7 +493,7 @@
           var moveEventHandler = eventHandlers.move;
           var cancelEventHandler = eventHandlers.cancel;
 
-          var $movementTarget = typeof options.movementTarget === 'function' ? options.movementTarget($element) : angular.element($element[0].ownerDocument);
+          var $movementTarget = movementTarget($element);
           var onTouchMove;
           var onTouchEnd;
           var onTouchCancel;

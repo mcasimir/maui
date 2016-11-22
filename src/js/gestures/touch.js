@@ -493,7 +493,7 @@
           var moveEventHandler = eventHandlers.move;
           var cancelEventHandler = eventHandlers.cancel;
 
-          var $movementTarget = movementTarget($element);
+          var $movementTarget = angular.element(movementTarget($element));
           var onTouchMove;
           var onTouchEnd;
           var onTouchCancel;

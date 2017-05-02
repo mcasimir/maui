@@ -470,7 +470,7 @@
           // ensure element to be an angular element
           $element = angular.element($element);
           var $html = angular.element('html');
-          
+
           options = options || {};
           // uses default pointer types in case of none passed
           var pointerTypes = options.pointerTypes || POINTER_TYPES;
@@ -478,8 +478,8 @@
           var movementThreshold = options.movementThreshold === undefined ? MOVEMENT_THRESHOLD : options.movementThreshold;
           var sensitiveArea = options.sensitiveArea === undefined ? SENSITIVE_AREA : options.sensitiveArea;
           var movementTarget = options.movementTarget === undefined ? MOVEMENT_TARGET : options.movementTarget;
-          
-          //Cancel refresh
+
+          // Cancel refresh
           var oldTouchAction;
           var oldOverflowY;
           // first and last touch
@@ -509,7 +509,7 @@
             if (cancelEvents) {
               $movementTarget.off(cancelEvents, onTouchCancel);
             }
-            if(options.preventPullToRefresh) {
+            if (options.preventPullToRefresh) {
               $html.css({'touch-action': oldTouchAction, 'overflow-y': oldOverflowY});
             }
           };
@@ -528,14 +528,14 @@
             if (event.touches && event.touches.length > 1) {
               return;
             }
-            
-            //Pull down refresh cancel
-            if(options.preventPullToRefresh) {
+
+            // Pull down refresh prevent
+            if (options.preventPullToRefresh) {
               oldTouchAction = $html.css('touch-action');
               oldOverflowY = $html.css('overflow-y');
-              $html.css({'touch-action': 'pan-down', 'overflow-y': 'hidden'});          
+              $html.css({'touch-action': 'pan-down', 'overflow-y': 'hidden'});
             }
-          
+
             tl = t0 = buildTouchInfo('touchstart', getCoordinates(event));
             $movementTarget.on(moveEvents, onTouchMove);
             $movementTarget.on(endEvents, onTouchEnd);
@@ -558,7 +558,7 @@
 
           // on touchMove
           onTouchMove = function(event) {
-            
+
             // don't handle multi-touch
             if (event.touches && event.touches.length > 1) {
               return;
@@ -587,7 +587,7 @@
             var totalY = t.totalY;
 
             tl = t;
-            
+
             if (totalX < movementThreshold && totalY < movementThreshold) {
               return;
             }

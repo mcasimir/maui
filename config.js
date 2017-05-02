@@ -70,6 +70,6 @@ config.globs.js = []
   .concat(config.globs.gestures);
 
 config.globs.typescript = []
-  .concat(config.globs.gesturesDef)
-  
+  .concat(config.globs.gesturesDef);
+
 module.exports = config;

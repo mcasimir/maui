@@ -151,7 +151,7 @@ gulp.task('ts:definitions', function() {
 });
 
 
-gulp.task('ts', ['ts:definitions'])
+gulp.task('ts', ['ts:definitions']);
 
 /* ======================================
 =            Build Sequence            =

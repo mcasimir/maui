@@ -1,8 +1,8 @@
 'use strict';
 
-let path = require('path');
+var path = require('path');
 
-let config = {
+var config = {
   globs: {
     core: [
       'node_modules/fastclick/lib/fastclick.js',
@@ -19,6 +19,9 @@ let config = {
     gestures: [
       'src/js/gestures/**/*.js',
       'src/js/mobile-angular-ui.gestures.js'
+    ],
+    gesturesDef: [
+      'src/js/gestures/**/*.d.ts'
     ],
     fonts: 'node_modules/font-awesome/fonts/fontawesome-webfont.*',
     vendorLess: [
@@ -65,5 +68,8 @@ config.globs.js = []
   .concat(config.globs.core)
   .concat(config.globs.components)
   .concat(config.globs.gestures);
+
+config.globs.typescript = []
+  .concat(config.globs.gesturesDef);
 
 module.exports = config;

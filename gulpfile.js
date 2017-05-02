@@ -1,23 +1,23 @@
-let config = require('./config');
-let gulp = require('gulp');
-let temp = require('temp');
+var config = require('./config');
+var gulp = require('gulp');
+var temp = require('temp');
 
 /* ========================================
 =            Requiring stuffs            =
 ========================================*/
 
-let concat = require('gulp-concat');
-let csso = require('gulp-csso');
-let del = require('del');
-let less = require('gulp-less');
-let mobilizer = require('gulp-mobilizer');
-let path = require('path');
-let rename = require('gulp-rename');
-let seq = require('gulp-sequence');
-let sourcemaps = require('gulp-sourcemaps');
-let uglify = require('gulp-uglify');
-let connect = require('gulp-connect');
-let waitOn = require('wait-on');
+var concat = require('gulp-concat');
+var csso = require('gulp-csso');
+var del = require('del');
+var less = require('gulp-less');
+var mobilizer = require('gulp-mobilizer');
+var path = require('path');
+var rename = require('gulp-rename');
+var seq = require('gulp-sequence');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
+var connect = require('gulp-connect');
+var waitOn = require('wait-on');
 
 /* ================================================
 =            Report Errors to Console            =
@@ -48,7 +48,7 @@ gulp.task('fonts', function() {
 =            Compile, minify, mobilize less                            =
 ======================================================================*/
 
-let CSS_TEMP_DIR = temp.path({prefix: 'maui-css'});
+var CSS_TEMP_DIR = temp.path({prefix: 'maui-css'});
 
 gulp.task('css:less', function() {
   gulp.src([
@@ -116,7 +116,7 @@ gulp.task('css', function(done) {
 =            Compile and minify js generating source maps            =
 ====================================================================*/
 
-let compileJs = function(dest, src) {
+var compileJs = function(dest, src) {
   return gulp.src(src)
     .pipe(sourcemaps.init())
     .pipe(concat(dest))
@@ -140,6 +140,17 @@ gulp.task('js:main', function() {
 });
 
 gulp.task('js', ['js:main', 'js:gestures', 'js:core']);
+
+/* ==================================
+=  Copy typescript definitions      =
+===================================*/
+
+gulp.task('ts:definitions', function() {
+  return gulp.src(config.globs.typescript)
+    .pipe(gulp.dest(path.join('dist', 'js')));
+});
+
+gulp.task('ts', ['ts:definitions']);
 
 /* ======================================
 =            Build Sequence            =
@@ -169,7 +180,7 @@ gulp.task('build:wait', waitFor([
 ]));
 
 gulp.task('build', function(done) {
-  seq('clean', ['fonts', 'css', 'js'], 'build:wait', done);
+  seq('clean', ['fonts', 'css', 'js', 'ts'], 'build:wait', done);
 });
 
 /* ==========================================
@@ -177,7 +188,7 @@ gulp.task('build', function(done) {
 ==========================================*/
 
 gulp.task('dev', function(done) {
-  let tasks = [];
+  var tasks = [];
 
   tasks.push('connect');
   tasks.push('watch');

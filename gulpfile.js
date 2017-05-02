@@ -150,7 +150,6 @@ gulp.task('ts:definitions', function() {
     .pipe(gulp.dest(path.join('dist', 'js')));
 });
 
-
 gulp.task('ts', ['ts:definitions']);
 
 /* ======================================
